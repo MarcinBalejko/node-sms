@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-// Init Nexmo///////////////////////////
+// Init Nexmo
 const nexmo = new Nexmo({
     apiKey: process.env.API_KEY,
     apiSecret: process.env.API_SECRET
@@ -33,10 +33,8 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Catch form submit //////////////////////
+// Catch form submit
 app.post('/', (req, res) => {
-    // res.send(req.body)
-    // console.log(req.body);
     const number = req.body.number;
     const text = req.body.text;
 
