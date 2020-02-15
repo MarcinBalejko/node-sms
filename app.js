@@ -3,6 +3,16 @@ const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const Nexmo = require('nexmo');
 const socketio = require('socket.io');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+// Init Nexmo///////////////////////////
+const nexmo = new Nexmo({
+    apiKey: process.env.API_KEY,
+    apiSecret: process.env.API_SECRET
+
+}, { debug: true });
 
 // Init app
 const app = express();
@@ -23,10 +33,24 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-// Catch form submit
+// Catch form submit //////////////////////
 app.post('/', (req, res) => {
-    res.send(req.body)
-    console.log(req.body);  // shows what's being submitted
+    // res.send(req.body)
+    // console.log(req.body);
+    const number = req.body.number;
+    const text = req.body.text;
+
+    nexmo.message.sendSms(
+        "NEXMO", number, text, { type: 'unicode' },
+        (err, responseData) => {
+            if (err) {
+                console.log(err);
+            } else {
+                console.dir(responseData);
+            }
+        }
+    );
+
 });
 
 // Define port

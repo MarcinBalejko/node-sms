@@ -1,12 +1,12 @@
-const numberInput = document.getElementById('number'), // assigning elements to variables
+const numberInput = document.getElementById('number'),
     textInput = document.getElementById('msg'),
     button = document.getElementById('button'),
     response = document.querySelector('.response');
 
-button.addEventListener('click', send, false);   // false cause no other option
+button.addEventListener('click', send, false);
 
 function send() {
-    const number = numberInput.value.replace(/\D/g, ''); // making sure there is no non-numeric characters
+    const number = numberInput.value.replace(/\D/g, '');
     const text = textInput.value;
 
     fetch('/', {
